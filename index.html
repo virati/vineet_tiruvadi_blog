@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="styles/clean.css">
+		<script>
+			$(document).ready(function(){
+				$(nav_graph).hide();
+				var ng_showed = false;
+				$("button").click(function(){
+					
+					if (ng_showed == true) {
+						$(nav_graph).hide();
+						ng_showed = false;
+					}
+					else {
+						$(nav_graph).show();
+						ng_showed = true;
+					}
+				});
+				
+				$(post).click(function(){
+					$(nav_graph).show();
+				});
+			});
+		</script>
+		
+		<script>
+			var gl;
+			
+			function start() {
+				var canvas = document.getElementById("glcanvas");
+				gl = initWebGL(canvas);
+				
+				if(gl){
+					gl.clearColor(0.0,0.0,0.0,1.0);
+					gl.enable(gl.DEPTH_TEST);
+					gl.depthFunc(gl.LEQUAL);
+					gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+				}
+			}
+			
+			function initWebGL(canvas) {
+				gl = null;
+				
+				try {
+					gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+				}
+				catch(e) {}
+				
+				if(!gl) {
+					alert("Unable to init WebGL");
+					gl = null;
+				}
+				
+				return gl;
+			}
+		</script>
+	</head>
+
+	<body onload="start()">
+		<div id="header">
+			<div id="title">
+				<h1>Vineet.Tiruvadi<span class="corner">.Blog</span></h1>
+			</div>
+			<div id="navigation">
+				<ul class="menu">
+					<li><a class="menu">Home</a></li>
+					<li><a class="menu">Blog</a></li>
+					<li><a class="menu">Research</a></li>
+					<li><a class="menu">Projects</a></li>
+					<li><a class="menu">Portfolio</a></li>
+					<li><button>Toggle NavGL</button></li>
+				</ul>
+			</div>
+			<div id="nav_graph">
+				<canvas id="glcanvas" width="400" height="400">
+					Your browser doesn't support HTML5 <code>&lt;canvas&gt;</code> elements.
+				</canvas>
+			</div>
+		
+		</div>
+		
+
+		<div id="view">
+			<div id="leaf">
+				<div class="post">
+					<h2>Welcome to the blog!</h2>
+					<h3 class="date_indic">Thursday 12-06-2014</h3>
+					<p>This is the first iteration of my custom blog "framework". Head over to <a href="http://github.com/virati">GitHub</a> if you're interested in seeing how it works (in progress...).</p>
+					<p>Starting a blog isn't easy. Sure, there are plenty of frameworks out there, but it's really quite a daunting task to set one up. If you choose a framework, you have to go through the motions of figuring out where your vision fits into it. Besides being frustrating, it can be constraining. This, my latest attempt to start a blog, started with Ruby-on-rails (overkill), moved to Django (looks great, but need time to learn it), forayed into Hexo (too simple), and finally led to my favorite option: from-scratch.</p>
+					<p>I ended up doing what I always love to do: working from scratch. I set up a quick html page with content, got the css just right then introduced/explored jquery and WebGL. I set out to have this blog be my way of keeping up with the latest web technologies but I may actually decide to develop this further into a web framework (hell, everyone has one these days). Chances are I'm going to migrate this to Django soon, but in the meantime this is too much fun.</p>
+					<p>It's just the beginning though. My immediate next steps are to:
+						<ul>
+							<li>Figure out how to make this post text look nicer</li>
+							<li>Work more on generative methods; Posts should be separate entities/files separate from the formating. I might go with XML but it seems the XML/XSLT paradigm is dying</li>
+							<li>Start churning out content!</li>
+						</ul>
+					</p>
+					<p>Stay tuned for more content (in both the Blog and other corners of my site). Cheers! -V</p>
+				</div>
+				
+				
+			</div>
+			<div id="bar">
+				<p>Hi there! Welcome to my little corner of the internet.</p>
+				<img src="images/headshot.jpg"/ width="290px">
+			</div>
+		</div>
+			
+	</body>
+
+</html>
